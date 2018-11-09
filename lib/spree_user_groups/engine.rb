@@ -18,7 +18,11 @@ module SpreeUserGroups
 
       if File.basename( $0 ) != "rake"
         begin
-          config.spree.calculators.add_class('user_groups')
+          # append struct member: config.spree.calculators.user_groups
+          calculators_config = Struct.new(:user_groups, *config.spree.calculators.members).new
+          calculators_config.members.each { |m| calculators_config[m] = config.spree.calculators.dig(m) }
+          config.spree.calculators = calculators_config
+
           config.spree.calculators.user_groups = [
             Spree::Calculator::AdvancedFlatPercent,
             Spree::Calculator::PerVariantPricing

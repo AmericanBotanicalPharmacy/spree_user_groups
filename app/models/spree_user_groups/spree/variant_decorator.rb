@@ -1,4 +1,4 @@
-Spree::Variant.class_eval do
+module SpreeUserGroups::Spree::VariantDecorator
   include ActionView::Helpers
 
   def price_for_user(user, currency = nil)
@@ -27,3 +27,5 @@ Spree::Variant.class_eval do
     @price_in[currency] = Spree::Price.new(variant_id: self.id, amount: new_amount, currency: currency)
   end
 end
+
+::Spree::Variant.prepend SpreeUserGroups::Spree::VariantDecorator

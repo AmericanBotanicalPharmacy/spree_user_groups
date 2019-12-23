@@ -14,7 +14,7 @@ module SpreeUserGroups
         Rails.configuration.cache_classes ? require(c) : load(c)
       end
 
-      Spree::PermittedAttributes.user_attributes << :user_group_id
+      ::Spree::PermittedAttributes.user_attributes << :user_group_id
 
       if File.basename( $0 ) != "rake"
         begin
@@ -24,8 +24,8 @@ module SpreeUserGroups
           config.spree.calculators = calculators_config
 
           config.spree.calculators.user_groups = [
-            Spree::Calculator::AdvancedFlatPercent,
-            Spree::Calculator::PerVariantPricing
+            ::Spree::Calculator::AdvancedFlatPercent,
+            ::Spree::Calculator::PerVariantPricing
           ]
         rescue Exception => e
           $stderr.puts "Error registering promotion calculator,#{e.message}"

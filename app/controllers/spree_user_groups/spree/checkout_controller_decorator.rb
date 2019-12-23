@@ -1,5 +1,9 @@
-Spree::CheckoutController.class_eval do
-  before_action :verify_minimum_order
+module SpreeUserGroups::Spree::CheckoutControllerDecorator
+  def self.included base
+    base.class_eval do
+      before_action :verify_minimum_order
+    end
+  end
 
   private
   def before_address
@@ -19,3 +23,7 @@ Spree::CheckoutController.class_eval do
     end
   end
 end
+
+::Spree::CheckoutController.prepend SpreeUserGroups::Spree::CheckoutControllerDecorator
+
+

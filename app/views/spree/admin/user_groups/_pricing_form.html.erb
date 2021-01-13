@@ -16,7 +16,7 @@
     <% ugv = Spree::UserGroupsVariant.where(:user_group_id => @user_group).where(:variant_id => v).first %>
     <tr>
       <td>
-        <%= variant_options(v) || Spree.t(:master) %> (<%= v.sku %>)
+        <%= v.options_text || Spree.t(:master) %> (<%= v.sku %>)
       </td>
       <td>
         Base Price (<%= v.display_price || Spree.t(:master).downcase %>)

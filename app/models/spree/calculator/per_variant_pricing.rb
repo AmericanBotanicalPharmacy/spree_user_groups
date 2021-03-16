@@ -16,6 +16,8 @@ class Spree::Calculator::PerVariantPricing < Spree::Calculator
 
     item_total = object.line_items.map(&:amount).sum
     
+    Rails.logger.error '*' * 100
+    Rails.logger.error object.user.inspect
     item_cost_price_total = object.line_items.map do |li| 
       li_amount = li.variant.price * li.quantity
       ugv = Spree::UserGroupsVariant.where(:user_group_id => object.user.user_group.id, :variant_id => li.variant_id).first

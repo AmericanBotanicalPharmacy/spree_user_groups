@@ -8,11 +8,11 @@ module SpreeUserGroups::Spree::UserDecorator
   
   module ClassMethods
     def current
-      Thread.current[:user]
+      RequestStore.store[:user]
     end
 
     def current=(user)
-      Thread.current[:user] = user
+      RequestStore.store[:user] = user
     end
   end
 end
